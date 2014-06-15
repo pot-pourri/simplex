@@ -1,0 +1,7 @@
+{
+  "name": "oro",
+  "version": "0.0.0",
+  "description" : "operations research and optimization algorithm templates for JavaScript",
+  "homepage": "https://github.com/aureooms/oro",
+  "license": "GPL v2"
+}
