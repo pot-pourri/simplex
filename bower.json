@@ -1,7 +1,7 @@
 {
+	"license": "GPL v2",
 	"name": "oro",
+	"version": "0.0.2",
 	"homepage": "https://github.com/aureooms/oro",
-	"version": "0.0.1",
-	"description": "operations research and optimization algorithm templates for JavaScript",
-	"license": "GPL v2"
+	"description": "operations research and optimization algorithm templates for JavaScript"
 }
