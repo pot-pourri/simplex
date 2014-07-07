@@ -18,7 +18,7 @@ var base = function(c, A, b, m, n) {
 	z = 0;
 
 
-	for (j = 0; j < n && h < m; ++j) {
+	for (j = 0; j < m; ++j) {
 		for (i = h; i < m; ++i) {
 
 			if (A[i][j] !== 0) {
