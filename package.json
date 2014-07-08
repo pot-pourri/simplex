@@ -1,17 +1,20 @@
 {
-	"author": "Ooms Aur\u00e9lien <aurelien.ooms@gmail.com> (http://aureooms.wolkom.net/)",
 	"devDependencies": {
-		"codeclimate-test-reporter": "0.0.3",
-		"qunit": "^0.6.3",
 		"istanbul": "^0.2.11",
-		"recquire": "^0.1.0",
+		"coveralls": "^2.10.0",
+		"qunit": "^0.6.3",
 		"uglify-js": "^2.4.13",
 		"recbuild": "^0.0.3",
-		"optimist": "^0.6.1",
-		"coveralls": "^2.10.0"
+		"codeclimate-test-reporter": "0.0.3",
+		"recquire": "^0.1.0",
+		"optimist": "^0.6.1"
 	},
-	"bugs": {
-		"url": "https://github.com/aureooms/oro/issues"
+	"homepage": "https://aureooms.github.io/oro",
+	"version": "0.0.5",
+	"license": "GPL v2",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/aureooms/oro.git"
 	},
 	"keywords": [
 		"js",
@@ -22,19 +25,16 @@
 		"research",
 		"optimization"
 	],
-	"homepage": "https://aureooms.github.io/oro",
 	"main": "js/dist/oro.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/aureooms/oro.git"
-	},
-	"license": "GPL v2",
-	"dependencies": {},
 	"description": "operations research and optimization algorithm templates for JavaScript",
+	"author": "Ooms Aur\u00e9lien <aurelien.ooms@gmail.com> (http://aureooms.wolkom.net/)",
+	"bugs": {
+		"url": "https://github.com/aureooms/oro/issues"
+	},
+	"dependencies": {},
 	"scripts": {
 		"build": "node js/build.js",
 		"test": "node test/js/run.js"
 	},
-	"version": "0.0.4",
 	"name": "oro"
 }
