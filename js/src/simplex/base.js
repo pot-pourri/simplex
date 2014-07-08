@@ -12,7 +12,7 @@
  */
 
 var base = function(c, A, b, m, n) {
-	var k, i, j, h, g, f, tmp, z;
+	var k, i, j, h, g, f, tmp, z, Ai, Aij, Ah, Af, Afj, cj, bh;
 
 	h = 0;
 	z = 0;
@@ -21,39 +21,53 @@ var base = function(c, A, b, m, n) {
 	for (j = 0; j < m; ++j) {
 		for (i = h; i < m; ++i) {
 
-			if (A[i][j] !== 0) {
+			// cache
+
+			Ai  = A[i];
+			Aij = Ai[j];
+			Ah  = A[h];
+
+			if (Aij !== 0) {
 
 				// swap line i with line of index h for [A]
 
 				for (g = 0; g < n; ++g) {
-					tmp  = A[i][g];
-					A[i][g] = A[h][g];
-					A[h][g] = tmp / A[i][j];
+					tmp   = Ai[g];
+					Ai[g] = Ah[g];
+					Ah[g] = tmp / Aij;
 				}
 
 				// swap line i with line of index h for [b]
 
 				tmp  = b[i];
 				b[i] = b[h];
-				b[h] = tmp / A[i][j];
+				b[h] = tmp / Aij;
 
-				// remove base var from [c]
+				// cache
 
-				for (g = 0; g < j; ++g) c[g] -= c[j] * A[h][g];
-				for (  ++g; g < n; ++g) c[g] -= c[j] * A[h][g];
+				bh = b[h];
+				cj = c[j];
 
-				z    += c[j] * b[h];
+				// remove base var from [c] by updating all variables
+
+				for (g = 0; g < j; ++g) c[g] -= cj * Ah[g];
+				for (  ++g; g < n; ++g) c[g] -= cj * Ah[g];
+
+				z   += cj * bh;
 				c[j] = 0;
 
 				// remove base var from lines < h
 
 				for (f = 0; f < h; ++f) {
 
-					for (g = 0; g < j; ++g) A[f][g] -= A[f][j] * A[h][g];
-					for (  ++g; g < n; ++g) A[f][g] -= A[f][j] * A[h][g];
+					Af  = A[f];
+					Afj = Af[j];
 
-					b[f] += A[f][j] * b[h]; // update [b]
-					A[f][j] = 0;
+					for (g = 0; g < j; ++g) Af[g] -= Afj * Ah[g];
+					for (  ++g; g < n; ++g) Af[g] -= Afj * Ah[g];
+
+					b[f] -= Afj * bh; // update [b]
+					Af[j] = 0;
 
 				}
 
@@ -64,11 +78,14 @@ var base = function(c, A, b, m, n) {
 
 				for (f = h; f < m; ++f) {
 
-					for (g = 0; g < j; ++g) A[f][g] -= A[f][j] * A[h][g];
-					for (  ++g; g < n; ++g) A[f][g] -= A[f][j] * A[h][g];
+					Af  = A[f];
+					Afj = Af[j];
 
-					b[f] += A[f][j] * b[h]; // update [b]
-					A[f][j] = 0;
+					for (g = 0; g < j; ++g) Af[g] -= Afj * Ah[g];
+					for (  ++g; g < n; ++g) Af[g] -= Afj * Ah[g];
+
+					b[f] -= Afj * bh; // update [b]
+					Af[j] = 0;
 
 				}
 
@@ -85,7 +102,7 @@ var base = function(c, A, b, m, n) {
 
 // var test = function(){
 // 	var m = 2, n = 4;
-// 	var c = [5, 3, -2, 19];
+// 	var c = [5, 3, -2, 19], _c = c.slice();
 // 	var A = [[1, 2, 3, 4], [9, 10, -1, 3]];
 // 	var b = [1, 2];
 // 	var z = base(c, A, b, m, n);
@@ -96,4 +113,13 @@ var base = function(c, A, b, m, n) {
 // 	console.log('m', m);
 // 	console.log('n', n);
 // 	console.log('z', z);
+
+// 	var w = 0;
+
+// 	for (var i = 0; i < m; ++i) {
+// 		w += b[i] * _c[i];
+// 	}
+
+// 	console.log('w', w);
+
 // };
