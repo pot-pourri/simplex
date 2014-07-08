@@ -3,7 +3,7 @@
 /**
  * hyp:
  *   - m <= n
- *   - no all 0's columns (all 0's columns leads to either min -> useless variable; or max -> unbounded)
+ *   - assumes matrix is invertible
  *   - all constraints are equalities
  *
  *
