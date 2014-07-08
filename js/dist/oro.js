@@ -107,30 +107,8 @@ var base = function(c, A, b, m, n) {
 
 };
 
-// var test = function(){
-// 	var m = 2, n = 4;
-// 	var c = [5, 3, -2, 19], _c = c.slice();
-// 	var A = [[1, 2, 3, 4], [9, 10, -1, 3]];
-// 	var b = [1, 2];
-// 	var z = base(c, A, b, m, n);
 
-// 	console.log('c', c);
-// 	console.log('A', A);
-// 	console.log('b', b);
-// 	console.log('m', m);
-// 	console.log('n', n);
-// 	console.log('z', z);
-
-// 	var w = 0;
-
-// 	for (var i = 0; i < m; ++i) {
-// 		w += b[i] * _c[i];
-// 	}
-
-// 	console.log('w', w);
-
-// };
-
+exports.base = base;
 /* /home/genius/dev/oro/js/src/simplex/gap.js */
 
 /* /home/genius/dev/oro/js/src/simplex/normalize.js */
