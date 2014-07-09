@@ -8,14 +8,29 @@
 
 
 /**
+ *
+ * /!\ not finished
+ *
+ * must investigate the case where x >= 0
+ *
+ * (could simplify code by considering a m+1 * n+1 matrix where
+ * b would be the last column, c the last row, and the value -z would be
+ * the last cell of the matrix A[m][n], the code could then be used
+ * to solve any m hyperplane system in R^{m})
+ * 
+ * still have to decide what to do when matrix is not invertible (preprocess maybe)
+ *
+ * 
+ */
+
+
+
+/**
  * hyp:
  *   - m <= n
  *   - assumes matrix is invertible
  *   - all constraints are equalities
  *
- *
- *
- * /!\ not finished, must investigate the case where x >= 0
  */
 
 var base = function(c, A, b, m, n) {
@@ -25,7 +40,7 @@ var base = function(c, A, b, m, n) {
 	z = 0;
 
 
-	for (j = 0; j < m; ++j) {
+	l : for (j = 0; j < m; ++j) {
 		for (i = h; i < m; ++i) {
 
 			// cache
@@ -97,10 +112,12 @@ var base = function(c, A, b, m, n) {
 				}
 
 
-				break;
+				continue l;
 			}
 
 		}
+
+		
 	}
 
 	return z;
