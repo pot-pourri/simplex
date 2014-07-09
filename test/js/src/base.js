@@ -10,28 +10,29 @@ test('base', function(){
 	var random = function(n) { return (Math.random() - .5) * n; };
 
 	var randomCheck = function(m, n, range){
-		var j, i, Ai, z = 0;
+		var j, i, Ai, z, w, b, c, A;
 
-		var c = [];
-		for (j = 0; j < n; ++j) c.push(random(range));
-
-		var A = [];
-		for (i = 0; i < m; ++i) {
+		A = [];
+		for (i = 0; i <= m; ++i) {
 			Ai = [];
-			for (j = 0; j < n; ++j) Ai.push(random(range));
+			for (j = 0; j <= n; ++j) Ai.push(random(range));
 			A.push(Ai);
 		}
 
-		var b = [];
-		for (i = 0; i < m; ++i) b.push(random(range));
+		A[m][n] = 0;
 
-		var _c = c.slice();
+		c = A[m].slice();
 
-		z = oro.base(c, A, b, m, n);
+		oro.base(A, m, n);
 
-		var w = 0;
+		b = [];
+		for (i = 0; i < m; ++i) b.push(A[i][n]);
 
-		for (var i = 0; i < m; ++i) w += b[i] * _c[i];
+		z = -A[m][n];
+
+		w = 0;
+
+		for (var i = 0; i < m; ++i) w += b[i] * c[i];
 
 		ok(eq(z, w, e), fmt("check soundness (%d, %d)", z, w));
 	};

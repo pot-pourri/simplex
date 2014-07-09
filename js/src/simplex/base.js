@@ -2,18 +2,12 @@
 
 /**
  *
- * /!\ not finished
+ * /!\ THIS WORK IS NOT DONE
  *
  * must investigate the case where x >= 0
  *
- * (could simplify code by considering a m+1 * n+1 matrix where
- * b would be the last column, c the last row, and the value -z would be
- * the last cell of the matrix A[m][n], the code could then be used
- * to solve any m hyperplane system in R^{m})
- * 
- * still have to decide what to do when rank of the matrix is not n (preprocess maybe)
+ * still have to decide what to do when rank of the matrix is not n
  *
- * 
  */
 
 
@@ -24,13 +18,23 @@
  *   - assumes matrix is of rank m
  *   - all constraints are equalities
  *
+ *
+ * It might not be obvious at first sight but c, b and -z are encoded in A.
+ * A is in fact a (m+1) * (n+1) 2d matrix where
+ * b is the last column, c the last row, and the value -z is be
+ * the last cell of the matrix A[m][n].
+ * 
+ * A way of describing this algorithm would be to say that it is
+ * a line-wise version of the Gauss-Jordan algorithm where the
+ * last line and the last column are not considered as
+ * candidates for normalization.
+ *
  */
 
-var base = function(c, A, b, m, n) {
-	var k, i, j, h, g, f, tmp, z, Ai, Aij, Ah, Af, Afj, cj, bh;
+var base = function(A, m, n) {
+	var i, j, h, g, f, swap, Ai, Aij, Ah, Af, Afj;
 
 	h = 0;
-	z = 0;
 
 
 	l : for (j = 0; j < m; ++j) {
@@ -44,32 +48,13 @@ var base = function(c, A, b, m, n) {
 
 			if (Aij !== 0) {
 
-				// swap line i with line of index h for [A]
+				// swap line _i_ with line _h_
 
-				for (g = 0; g < n; ++g) {
-					tmp   = Ai[g];
+				for (g = 0; g <= n; ++g) {
+					swap  = Ai[g];
 					Ai[g] = Ah[g];
-					Ah[g] = tmp / Aij;
+					Ah[g] = swap / Aij;
 				}
-
-				// swap line i with line of index h for [b]
-
-				tmp  = b[i];
-				b[i] = b[h];
-				b[h] = tmp / Aij;
-
-				// cache
-
-				bh = b[h];
-				cj = c[j];
-
-				// remove base var from [c] by updating all variables
-
-				for (g = 0; g < j; ++g) c[g] -= cj * Ah[g];
-				for (  ++g; g < n; ++g) c[g] -= cj * Ah[g];
-
-				z   += cj * bh;
-				c[j] = 0;
 
 				// remove base var from lines < h
 
@@ -78,10 +63,9 @@ var base = function(c, A, b, m, n) {
 					Af  = A[f];
 					Afj = Af[j];
 
-					for (g = 0; g < j; ++g) Af[g] -= Afj * Ah[g];
-					for (  ++g; g < n; ++g) Af[g] -= Afj * Ah[g];
+					for (g = 0; g  < j; ++g) Af[g] -= Afj * Ah[g];
+					for (  ++g; g <= n; ++g) Af[g] -= Afj * Ah[g];
 
-					b[f] -= Afj * bh; // update [b]
 					Af[j] = 0;
 
 				}
@@ -91,15 +75,14 @@ var base = function(c, A, b, m, n) {
 
 				// remove base var from lines > h
 
-				for (f = h; f < m; ++f) {
+				for (f = h; f <= m; ++f) {
 
 					Af  = A[f];
 					Afj = Af[j];
 
-					for (g = 0; g < j; ++g) Af[g] -= Afj * Ah[g];
-					for (  ++g; g < n; ++g) Af[g] -= Afj * Ah[g];
+					for (g = 0; g  < j; ++g) Af[g] -= Afj * Ah[g];
+					for (  ++g; g <= n; ++g) Af[g] -= Afj * Ah[g];
 
-					b[f] -= Afj * bh; // update [b]
 					Af[j] = 0;
 
 				}
@@ -110,10 +93,13 @@ var base = function(c, A, b, m, n) {
 
 		}
 
+		// MUST CHECK c[j] === 0
+
+		return false;
 		
 	}
 
-	return z;
+	return true;
 
 };
 
