@@ -4,7 +4,7 @@ var fmt  = util.format;
 
 test('base', function(){
 
-	var e = 1e-10;
+	var e = 1e-6;
 	var eq = function(a, b, e) { return a >= b - e && a <= b + e; };
 
 	var random = function(n) { return (Math.random() - .5) * n; };

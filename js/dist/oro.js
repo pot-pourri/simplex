@@ -39,19 +39,17 @@
  */
 
 var base = function(A, m, n) {
-	var i, j, h, g, f, swap, Ai, Aij, Ah, Af, Afj;
-
-	h = 0;
+	var i, j, g, f, swap, Ai, Aij, Ah, Af, Afj;
 
 
 	l : for (j = 0; j < m; ++j) {
-		for (i = h; i < m; ++i) {
+		for (i = j; i < m; ++i) {
 
 			// cache
 
 			Ai  = A[i];
 			Aij = Ai[j];
-			Ah  = A[h];
+			Ah  = A[j];
 
 			if (Aij !== 0) {
 
@@ -63,9 +61,9 @@ var base = function(A, m, n) {
 					Ah[g] = swap / Aij;
 				}
 
-				// remove base var from lines < h
+				// remove base var from lines < _j_
 
-				for (f = 0; f < h; ++f) {
+				for (f = 0; f < j; ++f) {
 
 					Af  = A[f];
 					Afj = Af[j];
@@ -77,12 +75,9 @@ var base = function(A, m, n) {
 
 				}
 
+				// remove base var from lines > _j_
 
-				++h; // skip and increment h
-
-				// remove base var from lines > h
-
-				for (f = h; f <= m; ++f) {
+				for (++f; f <= m; ++f) {
 
 					Af  = A[f];
 					Afj = Af[j];
@@ -126,31 +121,25 @@ exports.base = base;
  * /!\ not finished, must investigate the case where x >= 0
  */
 
-var normalize = function(c, A, b, m, n) {
-	var tmp, i, j, Ai, Ak, k = n - 1;
+var normalize = function(c, A, m, n) {
+	var swap, i, j, Ai, Ak, k = n - 1;
 
 	v : for (i = 0; i <= k; ++i) {
 
 		Ai = A[i];
 
-		for (j = 0; j < m; ++j) if (Ai[j] !== 0) continue v;
+		for (j = 0; j <= m; ++j) if (Ai[j] !== 0) continue v;
 
-		if (c[i] === 0) {
-			tmp  = c[i];
-			c[i] = c[k];
-			c[k] = tmp;
+		Ak = A[k];
 
-			Ak = A[k];
-
-			for (j = 0; j < m; ++j) {
-				tmp   = Ai[j];
-				Ai[j] = Ak[j];
-				Ak[j] = tmp;
-			}
-
-			--i;
-			--k;
+		for (j = 0; j <= m; ++j) {
+			swap  = Ai[j];
+			Ai[j] = Ak[j];
+			Ak[j] = swap;
 		}
+
+		--i;
+		--k;
 	}
 
 	return k + 1;
@@ -165,9 +154,69 @@ exports.normalize = normalize;
  * m <= n
  */
 
-var simplex = function(c, x, A, b, m, n) {
-	var k = n - m, i, j;
+var simplex = function(A, m, n) {
+	var i, j, Am, Ah, Ahbo, Af, Afj, no, na, bo, ba, Ambo, k;
 
-	// ...
+	Am = A[m];
+
+
+	while (true) {
+
+		ba = Am[0];
+		bo = 0;
+
+		for (j = 1; j < n; ++j) {
+			if (Am[j] > a) {
+				ba = Am[j];
+				bo = j;
+			}
+		}
+
+		na = Am[n] / A[0][bo];
+		no = 0;
+
+		for (i = 1; i < m; ++i) {
+			k = A[i][n] / A[i][bo];
+
+			if (k > 0 && k < na) {
+				na = k;
+				no = i;
+			}
+		}
+
+		if (na <= 0) return;
+
+		Ah  = A[no];
+		Ahbo = Ah[bo];
+
+		for (j = 0; j <= n; ++j) Ah[j] /= Ahbo;
+
+
+		for (_i = 0; _i < no; ++_i) {
+
+			Af  = A[_i];
+			Afj = Af[bo];
+
+			for (_j = 0; _j  < j; ++_j) Af[_j] -= Afj * Ah[_j];
+			for (  ++_j; _j <= n; ++_j) Af[_j] -= Afj * Ah[_j];
+
+			Af[bo] = 0;
+
+		}
+
+		for (++_i; _i <= m; ++_i) {
+
+			Af  = A[_i];
+			Afj = Af[bo];
+
+			for (_j = 0; _j  < j; ++_j) Af[_j] -= Afj * Ah[_j];
+			for (  ++_j; _j <= n; ++_j) Af[_j] -= Afj * Ah[_j];
+
+			Af[bo] = 0;
+
+		}
+
+	}
+
 };
 })(typeof exports === 'undefined' ? this['oro'] = {} : exports);

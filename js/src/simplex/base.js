@@ -32,19 +32,17 @@
  */
 
 var base = function(A, m, n) {
-	var i, j, h, g, f, swap, Ai, Aij, Ah, Af, Afj;
-
-	h = 0;
+	var i, j, g, f, swap, Ai, Aij, Ah, Af, Afj;
 
 
 	l : for (j = 0; j < m; ++j) {
-		for (i = h; i < m; ++i) {
+		for (i = j; i < m; ++i) {
 
 			// cache
 
 			Ai  = A[i];
 			Aij = Ai[j];
-			Ah  = A[h];
+			Ah  = A[j];
 
 			if (Aij !== 0) {
 
@@ -56,9 +54,9 @@ var base = function(A, m, n) {
 					Ah[g] = swap / Aij;
 				}
 
-				// remove base var from lines < h
+				// remove base var from lines < _j_
 
-				for (f = 0; f < h; ++f) {
+				for (f = 0; f < j; ++f) {
 
 					Af  = A[f];
 					Afj = Af[j];
@@ -70,12 +68,9 @@ var base = function(A, m, n) {
 
 				}
 
+				// remove base var from lines > _j_
 
-				++h; // skip and increment h
-
-				// remove base var from lines > h
-
-				for (f = h; f <= m; ++f) {
+				for (++f; f <= m; ++f) {
 
 					Af  = A[f];
 					Afj = Af[j];
