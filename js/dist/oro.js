@@ -9,18 +9,12 @@
 
 /**
  *
- * /!\ not finished
+ * /!\ THIS WORK IS NOT DONE
  *
  * must investigate the case where x >= 0
  *
- * (could simplify code by considering a m+1 * n+1 matrix where
- * b would be the last column, c the last row, and the value -z would be
- * the last cell of the matrix A[m][n], the code could then be used
- * to solve any m hyperplane system in R^{m})
- * 
- * still have to decide what to do when rank of the matrix is not n (preprocess maybe)
+ * still have to decide what to do when rank of the matrix is not n
  *
- * 
  */
 
 
@@ -30,6 +24,17 @@
  *   - m <= n
  *   - assumes matrix is of rank m
  *   - all constraints are equalities
+ *
+ *
+ * It might not be obvious at first sight but c, b and -z are encoded in A.
+ * A is in fact a (m+1) * (n+1) 2d matrix where
+ * b is the last column, c the last row, and the value -z is be
+ * the last cell of the matrix A[m][n].
+ * 
+ * A way of describing this algorithm would be to say that it is
+ * a line-wise version of the Gauss-Jordan algorithm where the
+ * last line and the last column are not considered as
+ * candidates for normalization.
  *
  */
 
