@@ -21,7 +21,7 @@
 /**
  * hyp:
  *   - m <= n
- *   - assumes matrix is of rank n
+ *   - assumes matrix is of rank m
  *   - all constraints are equalities
  *
  */
