@@ -1,10 +1,10 @@
-(function(exports){
+(function(exports, undefined){
 
 	'use strict';
 
 
-/* /home/genius/dev/oro/js/src/simplex */
-/* /home/genius/dev/oro/js/src/simplex/base.js */
+/* js/src/simplex */
+/* js/src/simplex/base.js */
 
 
 /**
@@ -107,9 +107,9 @@ var base = function(A, m, n) {
 
 
 exports.base = base;
-/* /home/genius/dev/oro/js/src/simplex/gap.js */
+/* js/src/simplex/gap.js */
 
-/* /home/genius/dev/oro/js/src/simplex/normalize.js */
+/* js/src/simplex/normalize.js */
 
 /**
  * hyp:
@@ -165,7 +165,7 @@ var normalize_t = function(fn){
 };
 
 exports.normalize_t = normalize_t;
-/* /home/genius/dev/oro/js/src/simplex/simplex.js */
+/* js/src/simplex/simplex.js */
 
 
 /**

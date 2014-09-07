@@ -1,7 +1,19 @@
 {
-	"homepage": "https://github.com/aureooms/oro",
-	"license": "GPL v2",
-	"name": "oro",
-	"description": "operations research and optimization algorithm templates for JavaScript",
-	"version": "0.0.9"
+	"homepage": "https://aureooms.github.io/js-oro",
+	"license": "AGPL-3.0",
+	"name": "aureooms-js-oro",
+	"description": "operations research and optimization code bricks for JavaScript",
+	"version": "0.0.9",
+	"main": "js/dist/oro.js",
+	"ignore": [
+		"js/index.js",
+		"js/src",
+		"test",
+		"pkg.json",
+		"package.json",
+		".groc.json",
+		".travis.yml",
+		".gitignore",
+		"README.md"
+	]
 }

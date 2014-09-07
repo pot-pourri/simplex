@@ -1,0 +1,17 @@
+{
+	"ns": "oro",
+	"code": {
+		"main": [
+			"js",
+			"dist",
+			"oro.js"
+		],
+		"test": [
+			"test",
+			"js"
+		]
+	},
+	"src": "js/src/",
+	"debug": false,
+	"out": "js/dist/"
+}
