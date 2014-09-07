@@ -1,10 +1,10 @@
-[oro](http://aureooms.github.io/oro)
+[js-oro](http://aureooms.github.io/js-oro)
 ====
 
-operations research and optimization algorithm templates for JavaScript
+operations research and optimization code bricks for JavaScript
 
-[![Build Status](https://drone.io/github.com/aureooms/oro/status.png)](https://drone.io/github.com/aureooms/oro/latest)
-[![Coverage Status](https://coveralls.io/repos/aureooms/oro/badge.png)](https://coveralls.io/r/aureooms/oro)
-[![Dependencies Status](https://david-dm.org/aureooms/oro.png)](https://david-dm.org/aureooms/oro#info=dependencies)
-[![devDependencies Status](https://david-dm.org/aureooms/oro/dev-status.png)](https://david-dm.org/aureooms/oro#info=devDependencies)
-[![Code Climate](https://codeclimate.com/github/aureooms/oro.png)](https://codeclimate.com/github/aureooms/oro)
+[![Build Status](https://travis-ci.org/aureooms/js-oro.svg)](https://travis-ci.org/aureooms/js-oro)
+[![Coverage Status](https://coveralls.io/repos/aureooms/js-oro/badge.png)](https://coveralls.io/r/aureooms/js-oro)
+[![Dependencies Status](https://david-dm.org/aureooms/js-oro.png)](https://david-dm.org/aureooms/js-oro#info=dependencies)
+[![devDependencies Status](https://david-dm.org/aureooms/js-oro/dev-status.png)](https://david-dm.org/aureooms/js-oro#info=devDependencies)
+[![Code Climate](https://codeclimate.com/github/aureooms/js-oro.png)](https://codeclimate.com/github/aureooms/js-oro)
