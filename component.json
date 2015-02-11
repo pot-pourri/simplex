@@ -1,0 +1,11 @@
+{
+	"description": "operations research and optimization code bricks for JavaScript",
+	"version": "0.1.0",
+	"repo": "aureooms/js-oro",
+	"scripts": [
+		"js/dist/oro.js"
+	],
+	"name": "aureooms-js-oro",
+	"license": "AGPL-3.0",
+	"main": "js/dist/oro.js"
+}
