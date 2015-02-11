@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="en"><head><title>simplex/base</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="simplex/base"><meta name="groc-project-path" content="js/src/simplex/base.js"><meta name="groc-github-url" content="https://github.com/aureooms/js-oro"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/aureooms/js-oro/blob/master/js/src/simplex/base.js">js/src/simplex/base.js</a></div></div><div id="document"><div class="segment"></div><div class="segment"><div class="comments "><div class="wrapper"><p>/!\ THIS WORK IS NOT DONE</p>
+<p>must investigate the case where x &gt;= 0</p>
+<p>still have to decide what to do when rank of the matrix is not n</p></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>hyp:</p>
+<ul>
+<li>m &lt;= n</li>
+<li>assumes matrix is of rank m</li>
+<li>all constraints are equalities</li>
+</ul>
+<p>It might not be obvious at first sight but c, b and -z are encoded in A.
+A is in fact a (m+1) * (n+1) 2d matrix where
+b is the last column, c the last row, and the value -z is be
+the last cell of the matrix A[m][n].</p>
+<p>A way of describing this algorithm would be to say that it is
+a line-wise version of the Gauss-Jordan algorithm where the
+last line and the last column are not considered as
+candidates for normalization.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">var</span> base = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(A, m, n)</span> {</span>
+	<span class="hljs-keyword">var</span> i, j, g, f, swap, Ai, Aij, Ah, Af, Afj;
+
+
+	l : <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; m; ++j) {
+		<span class="hljs-keyword">for</span> (i = j; i &lt; m; ++i) {</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>cache</p></div></div><div class="code"><div class="wrapper">			Ai  = A[i];
+			Aij = Ai[j];
+			Ah  = A[j];
+
+			<span class="hljs-keyword">if</span> (Aij !== <span class="hljs-number">0</span>) {</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>swap line <em>i</em> with line <em>h</em></p></div></div><div class="code"><div class="wrapper">				<span class="hljs-keyword">for</span> (g = <span class="hljs-number">0</span>; g &lt;= n; ++g) {
+					swap  = Ai[g];
+					Ai[g] = Ah[g];
+					Ah[g] = swap / Aij;
+				}</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>remove base var from lines &lt; <em>j</em></p></div></div><div class="code"><div class="wrapper">				<span class="hljs-keyword">for</span> (f = <span class="hljs-number">0</span>; f &lt; j; ++f) {
+
+					Af  = A[f];
+					Afj = Af[j];
+
+					<span class="hljs-keyword">for</span> (g = <span class="hljs-number">0</span>; g  &lt; j; ++g) Af[g] -= Afj * Ah[g];
+					<span class="hljs-keyword">for</span> (  ++g; g &lt;= n; ++g) Af[g] -= Afj * Ah[g];
+
+					Af[j] = <span class="hljs-number">0</span>;
+
+				}</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>remove base var from lines &gt; <em>j</em></p></div></div><div class="code"><div class="wrapper">				<span class="hljs-keyword">for</span> (++f; f &lt;= m; ++f) {
+
+					Af  = A[f];
+					Afj = Af[j];
+
+					<span class="hljs-keyword">for</span> (g = <span class="hljs-number">0</span>; g  &lt; j; ++g) Af[g] -= Afj * Ah[g];
+					<span class="hljs-keyword">for</span> (  ++g; g &lt;= n; ++g) Af[g] -= Afj * Ah[g];
+
+					Af[j] = <span class="hljs-number">0</span>;
+
+				}
+
+
+				<span class="hljs-keyword">continue</span> l;
+			}
+
+		}</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>MUST CHECK c[j] === 0</p></div></div><div class="code"><div class="wrapper">		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+		
+	}
+
+	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+
+};
+
+
+exports.base = base;</div></div></div></div></body></html>

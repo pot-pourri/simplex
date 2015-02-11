@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head><title>simplex/normalize</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="simplex/normalize"><meta name="groc-project-path" content="js/src/simplex/normalize.js"><meta name="groc-github-url" content="https://github.com/aureooms/js-oro"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/aureooms/js-oro/blob/master/js/src/simplex/normalize.js">js/src/simplex/normalize.js</a></div></div><div id="document"><div class="segment"></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>hyp:</p>
+<ul>
+<li>m &lt;= n</li>
+<li>all constraints are equalities</li>
+</ul>
+<p><strong>Returns an int</strong><br/>(the number of effectively used variables /!\ not finished, must investigate the case where x &gt;= 0)</p></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">var</span> normalize_t = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(fn)</span>{</span>
+
+	<span class="hljs-keyword">var</span> normalize = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(A, m, n)</span> {</span>
+		<span class="hljs-keyword">var</span> swap, i, j, Ai, Ak, Am, k = n - <span class="hljs-number">1</span>;
+
+		Am = A[m];
+
+		v : <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt;= k; ++j) {
+
+			Ai = A[i];
+
+			
+			<span class="hljs-keyword">if</span> (Am[j] == <span class="hljs-number">0</span>) {</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>if variable is not present in objective function
+check whether it can be used to increase an other variable
+in order to obtain a admissible solution 
+with arbitrary high value</p></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>TODO continue
+for (j = 0; j &lt; i; ++j) if(A[_i][])</p></div></div><div class="code"><div class="wrapper">			}
+
+			<span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt;= m; ++j) <span class="hljs-keyword">if</span> (Ai[j] !== <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span> v;
+
+			Ak = A[k];
+
+			<span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt;= m; ++j) {
+				swap  = Ai[j];
+				Ai[j] = Ak[j];
+				Ak[j] = swap;
+			}
+
+			--i;
+			--k;
+		}
+
+		<span class="hljs-keyword">return</span> k + <span class="hljs-number">1</span>;
+
+	};
+
+};
+
+exports.normalize_t = normalize_t;</div></div></div></div></body></html>
