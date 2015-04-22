@@ -1,6 +1,6 @@
 {
 	"description": "operations research and optimization code bricks for JavaScript",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"repo": "aureooms/js-oro",
 	"scripts": [
 		"js/dist/oro.js"
