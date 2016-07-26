@@ -1,5 +1,5 @@
 {
-	"ns": "oro",
+	"name": "oro",
 	"code": {
 		"main": [
 			"js",
