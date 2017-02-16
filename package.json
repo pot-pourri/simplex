@@ -1,5 +1,5 @@
 {
-	"name": "aureooms-js-oro",
+	"name": "@aureooms/js-oro",
 	"description": "operations research and optimization code bricks for JavaScript",
 	"main": "js/dist/oro.js",
 	"bugs": {
