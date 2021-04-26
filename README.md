@@ -1,4 +1,4 @@
-[js-oro](http://aureooms.github.io/js-oro)
+[js-oro](http://make-github-pseudonymous-again.github.io/js-oro)
 ====
 
 operations research and optimization code bricks for JavaScript
