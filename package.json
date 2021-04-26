@@ -3,7 +3,7 @@
 	"description": "operations research and optimization code bricks for JavaScript",
 	"main": "js/dist/oro.js",
 	"bugs": {
-		"url": "https://github.com/aureooms/js-oro/issues"
+		"url": "https://github.com/make-github-pseudonymous-again/js-oro/issues"
 	},
 	"keywords": [
 		"js",
@@ -26,7 +26,7 @@
 	"dependencies": {},
 	"author": "aureooms",
 	"repository": {
-		"url": "https://github.com/aureooms/js-oro.git",
+		"url": "https://github.com/make-github-pseudonymous-again/js-oro.git",
 		"type": "git"
 	},
 	"homepage": "https://make-github-pseudonymous-again.github.io/js-oro",
